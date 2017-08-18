@@ -1,9 +1,10 @@
-/************************************************************
- * "Time is the intuition of ourselves and our inner space" *
- *                                                John Cage *
- * "sTime aka Time Subjectivizer"                           *
- * Leandro Estrella  [cargocollective.com/leandroestrella]  *
- ************************************************************/
+/**************************************************************
+ * "Time is the intuition of ourselves and our inner space"   *
+ *                                                  John Cage *
+ * "sTIME || Time Subjectivizer"                              *
+ * by Leandro Estrella  [cargocollective.com/leandroestrella] *
+ * assisted by Fernando Cordón [github.com/fernanCordon]      *
+ **************************************************************/
 
 String timeType, subjectiveTime, randomTime, instructions;  // time string variables
 int millisCounter, millisPressed, secondsCounter, minutesCounter, hoursCounter;  // time counters

@@ -1,0 +1,29 @@
+{
+  "name": "stime",
+  "version": "1.0.0",
+  "description": "time subjectivizer app",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leandroestrella/sTime.git"
+  },
+  "keywords": [
+    "time",
+    "perception",
+    "subjectivity",
+    "intuition"
+  ],
+  "author": "leandro estrella",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/leandroestrella/sTime/issues"
+  },
+  "homepage": "https://stime.leandroestrella.com",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3"
+  }
+}

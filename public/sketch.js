@@ -48,6 +48,14 @@ function setup() {
   minutesCounter = minute();
   hoursCounter = hour();
   createCanvas(windowWidth, windowHeight);
+  // API wip
+  loadJSON('/get', gotStime);
+}
+
+function gotStime(stime) {
+  console.log(stime);
+  var values = Object.values(stime);
+  //console.log(values);
 }
 
 function draw() {
@@ -133,13 +141,21 @@ function mouseReleased() {
     secondsCounter = second();
     minutesCounter = minute();
     hoursCounter = hour();
+    /* log */
+    console.log('time reset and set to aTime');
   } else {
     // subjectivize time
     // subjective seconds in relation to 10 seconds
     subjectiveSeconds = float(millisPressed) / 10000;
+    console.log('sTime created and set to ' + subjectiveSeconds);
     /* text and color */
     timeType = "sTIME";
     instructions = "tap to reset";
+    /* api wip */
+    loadJSON('set/' + subjectiveSeconds, finished);
+    function finished(data){
+      console.log(data);
+    }
   }
 }
 

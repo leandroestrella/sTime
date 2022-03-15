@@ -5,7 +5,7 @@ var app = express();
 var cors = require('cors');
 var server = app.listen(3000, listening);
 
-console.log('current sTimes');
+console.log('current sTIME(s)');
 var fs = require('fs');
 var data = fs.readFileSync('stimes.json');
 var stimes = JSON.parse(data);
@@ -17,7 +17,7 @@ function listening() {
 app.use(express.static('public'));
 app.use(cors());
 
-/* set sTime */
+/* set sTIME */
 app.get('/set/:stime?', setStime);
 function setStime(request, response) {
     var data = request.params;
@@ -26,7 +26,7 @@ function setStime(request, response) {
     var reply;
     if (!stime) {
         reply = {
-            error: 'sTime is required.'
+            error: 'sTIME is required.'
         }
         response.send(reply);
     } else {
@@ -34,24 +34,24 @@ function setStime(request, response) {
         var data = JSON.stringify(stimes, null, 2);
         fs.writeFile('stimes.json', data, finished);
         function finished(err) {
-            console.log(stime + ' sTime saved');
+            console.log(stime + ' sTIME saved');
             reply = {
-                stime: stime,
-                atime: current,
-                status: 'sTime successfully saved.'
+                sTIME: stime,
+                aTIME: current,
+                status: 'sTIME successfully saved.'
             }
             response.send(reply);
         }
     }
 }
 
-/* list sTimes */
+/* list sTIME(s) */
 app.get('/list', listStimes);
 function listStimes(request, response) {
     response.send(stimes);
 }
 
-/* get sTime */
+/* get sTIME */
 app.get('/get', getStime);
 function getStime(request, response) {
     var stime = Object.keys(stimes).reverse()[0];
@@ -59,19 +59,19 @@ function getStime(request, response) {
     if (stimes[stime]) {
         reply = {
             /*
-            status: 'sTime found',
-            sTime: stimes[stime],
-            aTime: 'created on ' + stime + ' (aTime)'
+            status: 'sTIME found',
+            sTIME: stimes[stime],
+            aTIME: 'created on ' + stime + ' (aTIME)'
             */
-            sTime: stimes[stime]
+            sTIME: stimes[stime]
         }
     } else {
         reply = {
             /*
-            status: 'no sTime found',
-            sTime: stime
+            status: 'no sTIME found',
+            sTIME: stime
             */
-           sTime: 'no sTime found'
+           sTIME: 'no sTIME found'
         }
     }
     response.send(reply);

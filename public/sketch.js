@@ -142,12 +142,12 @@ function mouseReleased() {
     minutesCounter = minute();
     hoursCounter = hour();
     /* log */
-    console.log('time reset and set to aTime');
+    console.log('time reset and set to aTIME');
   } else {
     // subjectivize time
     // subjective seconds in relation to 10 seconds
     subjectiveSeconds = float(millisPressed) / 10000;
-    console.log('sTime created and set to ' + subjectiveSeconds);
+    console.log('sTIME created and set to ' + subjectiveSeconds);
     /* text and color */
     timeType = "sTIME";
     instructions = "tap to reset";

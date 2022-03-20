@@ -2,10 +2,9 @@
 console.log('server is starting');
 const express = require('express');
 const app = express();
-const port = 443;
 
 var cors = require('cors');
-var server = app.listen(port, listening);
+var server = app.listen(process.env.PORT || 3000, listening);
 
 console.log('current sTIME(s)');
 var fs = require('fs');
@@ -14,13 +13,42 @@ var stimes = JSON.parse(data);
 console.log(stimes);
 
 function listening() {
-    console.log('listening...');
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('sTIME app listening at http://' + host + ':' + port);
 }
 app.use(express.static('public'));
 app.use(cors());
 
+// A router to load a URL
+app.get('/load', loadURL);
+
+// This is a module for HTTP Requests
+var request = require('request');
+
+// Callback
+function loadURL(req, res) {
+    // Get the URL from the user
+    var url = req.query.url;
+
+    // Execute the HTTP Request
+    request(url, loaded);
+
+    // Callback for when the request is complete
+    function loaded(error, response, body) {
+        // Check for errors
+        if (!error && response.statusCode == 200) {
+            // The raw HTML is in body
+            res.send(body);
+        } else {
+            res.send('error');
+        }
+    }
+}
+
 /* set sTIME */
 app.get('/set/:stime?', setStime);
+
 function setStime(request, response) {
     var data = request.params;
     var current = new Date().toUTCString();
@@ -35,6 +63,7 @@ function setStime(request, response) {
         stimes[current] = stime;
         var data = JSON.stringify(stimes, null, 2);
         fs.writeFile('stimes.json', data, finished);
+
         function finished(err) {
             console.log(stime + ' sTIME saved');
             reply = {
@@ -49,12 +78,14 @@ function setStime(request, response) {
 
 /* list sTIME(s) */
 app.get('/list', listStimes);
+
 function listStimes(request, response) {
     response.send(stimes);
 }
 
 /* get sTIME */
 app.get('/get', getStime);
+
 function getStime(request, response) {
     var stime = Object.keys(stimes).reverse()[0];
     var reply;
@@ -73,7 +104,7 @@ function getStime(request, response) {
             status: 'no sTIME found',
             sTIME: stime
             */
-           sTIME: 'no sTIME found'
+            sTIME: 'no sTIME found'
         }
     }
     response.send(reply);

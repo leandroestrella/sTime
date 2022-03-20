@@ -1,7 +1,13 @@
+if (typeof (PhusionPassenger) !== 'undefined') {
+    PhusionPassenger.configure({
+        autoInstall: false
+    });
+}
+
 /* init */
 console.log('server is starting');
-const express = require('express');
-const app = express();
+var express = require('express');
+var app = express();
 
 var cors = require('cors');
 var server = app.listen(process.env.PORT || 3000, listening);
@@ -22,18 +28,14 @@ app.use(cors());
 
 // A router to load a URL
 app.get('/load', loadURL);
-
 // This is a module for HTTP Requests
 var request = require('request');
-
 // Callback
 function loadURL(req, res) {
     // Get the URL from the user
     var url = req.query.url;
-
     // Execute the HTTP Request
     request(url, loaded);
-
     // Callback for when the request is complete
     function loaded(error, response, body) {
         // Check for errors
@@ -44,6 +46,13 @@ function loadURL(req, res) {
             res.send('error');
         }
     }
+}
+
+// https://www.phusionpassenger.com/library/indepth/nodejs/reverse_port_binding.html
+if (typeof (PhusionPassenger) !== 'undefined') {
+    app.listen('passenger');
+} else {
+    app.listen(3000);
 }
 
 /* set sTIME */

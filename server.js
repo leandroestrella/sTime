@@ -1,8 +1,10 @@
-if (typeof (PhusionPassenger) !== 'undefined') {
+
+/*if (typeof (PhusionPassenger) !== 'undefined') {
     PhusionPassenger.configure({
         autoInstall: false
     });
 }
+*/
 
 /* init */
 console.log('server is starting');
@@ -26,6 +28,7 @@ function listening() {
 app.use(express.static('public'));
 app.use(cors());
 
+/*
 // A router to load a URL
 app.get('/load', loadURL);
 // This is a module for HTTP Requests
@@ -47,13 +50,15 @@ function loadURL(req, res) {
         }
     }
 }
-
+*/
+/*
 // https://www.phusionpassenger.com/library/indepth/nodejs/reverse_port_binding.html
 if (typeof (PhusionPassenger) !== 'undefined') {
     app.listen('passenger');
 } else {
     app.listen(3000);
 }
+*/
 
 /* set sTIME */
 app.get('/set/:stime?', setStime);

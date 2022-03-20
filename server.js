@@ -1,9 +1,11 @@
 /* init */
 console.log('server is starting');
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+const port = 443;
+
 var cors = require('cors');
-var server = app.listen(3000, listening);
+var server = app.listen(port, listening);
 
 console.log('current sTIME(s)');
 var fs = require('fs');

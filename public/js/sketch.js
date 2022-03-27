@@ -19,7 +19,7 @@ var timeColor, instructionsColor, randomAlpha;
 var subjectiveSeconds, fontSize;
 
 function preload() {
-  font = loadFont("./assets/OpenSans-Bold.ttf");
+  font = loadFont("assets/OpenSans-Bold.ttf");
 }
 
 function windowResized() {

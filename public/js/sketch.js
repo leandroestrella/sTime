@@ -1,9 +1,9 @@
 /*
-  "Time is the intuition of ourselves and our inner space"
-    - John Cage
-  "sTIME || Time Subjectivizer"
-    by Leandro Estrella  [leandroestrella.com]
-    assisted by Fernando Cordón [github.com/fernanCordon]
+  'time is the intuition of ourselves and our inner space'
+    - john cage
+  'sTIME' a time subjectivizer app
+    by leandro estrella  [leandroestrella.com]
+    assisted by fernando cordón [github.com/fernanCordon]
 */
 
 // time string variables
@@ -19,7 +19,7 @@ var timeColor, instructionsColor, randomAlpha;
 var subjectiveSeconds, fontSize;
 
 function preload() {
-  font = loadFont("assets/OpenSans-Bold.ttf");
+  font = loadFont("./assets/OpenSans-Bold.ttf");
 }
 
 function windowResized() {
@@ -31,7 +31,7 @@ function setup() {
   /* string values */
   // artificial time
   timeType = "aTIME";
-  instructions = "press for 10'' to make your time";
+  instructions = "press for ten seconds to create your time";
   /* color setup*/
   timeColor = 255;
   instructionsColor = 107;
@@ -48,14 +48,6 @@ function setup() {
   minutesCounter = minute();
   hoursCounter = hour();
   createCanvas(windowWidth, windowHeight);
-  // API wip
-  loadJSON('/get', gotStime);
-}
-
-function gotStime(stime) {
-  console.log(stime);
-  var values = Object.values(stime);
-  //console.log(values);
 }
 
 function draw() {
@@ -84,12 +76,12 @@ function draw() {
   /* time type */
   fill(instructionsColor);
   text(timeType, width / 2, height / 2 - fontSize);
-  fill(7.5);
   // subjective difference
+  fill(0);
   text(subjectiveSeconds, width / 2, height / 2 + fontSize * 1.5);
   /* instructions */
   fill(instructionsColor);
-  text(instructions.toUpperCase(), width / 2, height / 2 + fontSize);
+  text(instructions, width / 2, height / 2 + fontSize);
   /* subjective time */
   textSize(fontSize);
   fill(timeColor);
@@ -136,27 +128,25 @@ function mouseReleased() {
     subjectiveSeconds = 1;
     /* text and color */
     timeType = "aTIME";
-    instructions = "press for 10'' to make your time";
+    instructions = "press for ten seconds to create your time";
     /* reset to system time */
     secondsCounter = second();
     minutesCounter = minute();
     hoursCounter = hour();
     /* log */
-    console.log('time reset and set to aTIME');
+    console.log("sTIME destroyed");
   } else {
-    // subjectivize time
+    /* subjectivize time */
     // subjective seconds in relation to 10 seconds
     subjectiveSeconds = float(millisPressed) / 10000;
-    console.log('sTIME created and set to ' + subjectiveSeconds);
+    console.log("sTIME created: " + subjectiveSeconds);
     /* text and color */
     timeType = "sTIME";
-    instructions = "tap to reset";
-    /* api wip */
-    loadJSON('set/' + subjectiveSeconds, finished);
-    function finished(data){
-      console.log(data);
-    }
+    instructions =
+      "\n press for ten seconds to (re)create your time \n tap to reset";
   }
+  /* update sTIME in db */
+  setStime();
 }
 
 function initializeFields() {

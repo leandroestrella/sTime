@@ -1,35 +1,548 @@
-html,
+* {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  /* text-transform: lowercase; */
+}
+
+html {
+  overflow: hidden auto;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
+  font-size: 100%;
+} /*16px*/
+
 body {
-  margin: 0;
+  border: 0;
   padding: 0;
-  background-color: black;
+  background-color: #000;
+  color: #fff;
+}
+
+iframe {
+  border: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: fixed !important;
+  text-shadow: 2px 2px 10px black;
+}
+
+a:hover {
+  text-decoration: line-through;
+  text-shadow: none;
+}
+
+#panel {
+  z-index: 1;
+}
+
+.glitch {
+  font-family: "Trebuchet MS", Helvetica, Jamrul, sans-serif;
+  font-family: sans-serif;
+  position: relative;
+}
+
+.glitch:hover::after,
+.glitch:hover::before {
   color: white;
+  content: "le";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: -10px;
+  text-decoration: line-through;
+}
+
+.glitch:hover::before {
+  left: 3px;
+  text-shadow: -2px 0 red;
+  -webkit-animation-name: glitch-animation-1;
+  animation-name: glitch-animation-1;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: reverse-alternate;
+  animation-direction: reverse-alternate;
+  clip: rect(82px 900px 117px 0px);
+}
+
+.glitch:hover::after {
+  left: -3px;
+  text-shadow: -2px 0 blue;
+  -webkit-animation-name: glitch-animation-2;
+  animation-name: glitch-animation-2;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: reverse-alternate;
+  animation-direction: reverse-alternate;
+  clip: rect(94px 900px 68px 0px);
+}
+
+@-webkit-keyframes glitch-animation-1 {
+  0% {
+    clip: rect(139px 900px 17px 0px);
+  }
+
+  5% {
+    clip: rect(70px 900px 40px 0px);
+  }
+
+  10% {
+    clip: rect(121px 900px 123px 0px);
+  }
+
+  15% {
+    clip: rect(21px 900px 72px 0px);
+  }
+
+  20% {
+    clip: rect(9px 900px 80px 0px);
+  }
+
+  25% {
+    clip: rect(109px 900px 105px 0px);
+  }
+
+  30% {
+    clip: rect(61px 900px 41px 0px);
+  }
+
+  35% {
+    clip: rect(103px 900px 6px 0px);
+  }
+
+  40% {
+    clip: rect(31px 900px 27px 0px);
+  }
+
+  45% {
+    clip: rect(101px 900px 55px 0px);
+  }
+
+  50% {
+    clip: rect(88px 900px 143px 0px);
+  }
+
+  55% {
+    clip: rect(110px 900px 122px 0px);
+  }
+
+  60% {
+    clip: rect(125px 900px 48px 0px);
+  }
+
+  65% {
+    clip: rect(40px 900px 125px 0px);
+  }
+
+  70% {
+    clip: rect(131px 900px 78px 0px);
+  }
+
+  75% {
+    clip: rect(113px 900px 91px 0px);
+  }
+
+  80% {
+    clip: rect(29px 900px 130px 0px);
+  }
+
+  85% {
+    clip: rect(106px 900px 25px 0px);
+  }
+
+  90% {
+    clip: rect(31px 900px 61px 0px);
+  }
+
+  95% {
+    clip: rect(67px 900px 130px 0px);
+  }
+
+  100% {
+    clip: rect(82px 900px 117px 0px);
+  }
+}
+
+@keyframes glitch-animation-1 {
+  0% {
+    clip: rect(139px 900px 17px 0px);
+  }
+
+  5% {
+    clip: rect(70px 900px 40px 0px);
+  }
+
+  10% {
+    clip: rect(121px 900px 123px 0px);
+  }
+
+  15% {
+    clip: rect(21px 900px 72px 0px);
+  }
+
+  20% {
+    clip: rect(9px 900px 80px 0px);
+  }
+
+  25% {
+    clip: rect(109px 900px 105px 0px);
+  }
+
+  30% {
+    clip: rect(61px 900px 41px 0px);
+  }
+
+  35% {
+    clip: rect(103px 900px 6px 0px);
+  }
+
+  40% {
+    clip: rect(31px 900px 27px 0px);
+  }
+
+  45% {
+    clip: rect(101px 900px 55px 0px);
+  }
+
+  50% {
+    clip: rect(88px 900px 143px 0px);
+  }
+
+  55% {
+    clip: rect(110px 900px 122px 0px);
+  }
+
+  60% {
+    clip: rect(125px 900px 48px 0px);
+  }
+
+  65% {
+    clip: rect(40px 900px 125px 0px);
+  }
+
+  70% {
+    clip: rect(131px 900px 78px 0px);
+  }
+
+  75% {
+    clip: rect(113px 900px 91px 0px);
+  }
+
+  80% {
+    clip: rect(29px 900px 130px 0px);
+  }
+
+  85% {
+    clip: rect(106px 900px 25px 0px);
+  }
+
+  90% {
+    clip: rect(31px 900px 61px 0px);
+  }
+
+  95% {
+    clip: rect(67px 900px 130px 0px);
+  }
+
+  100% {
+    clip: rect(82px 900px 117px 0px);
+  }
+}
+
+@-webkit-keyframes glitch-animation-2 {
+  0% {
+    clip: rect(71px 900px 27px 0px);
+  }
+
+  5% {
+    clip: rect(95px 900px 22px 0px);
+  }
+
+  10% {
+    clip: rect(77px 900px 141px 0px);
+  }
+
+  15% {
+    clip: rect(59px 900px 99px 0px);
+  }
+
+  20% {
+    clip: rect(50px 900px 136px 0px);
+  }
+
+  25% {
+    clip: rect(96px 900px 81px 0px);
+  }
+
+  30% {
+    clip: rect(79px 900px 29px 0px);
+  }
+
+  35% {
+    clip: rect(134px 900px 148px 0px);
+  }
+
+  40% {
+    clip: rect(145px 900px 90px 0px);
+  }
+
+  45% {
+    clip: rect(124px 900px 128px 0px);
+  }
+
+  50% {
+    clip: rect(135px 900px 130px 0px);
+  }
+
+  55% {
+    clip: rect(11px 900px 139px 0px);
+  }
+
+  60% {
+    clip: rect(84px 900px 44px 0px);
+  }
+
+  65% {
+    clip: rect(131px 900px 72px 0px);
+  }
+
+  70% {
+    clip: rect(103px 900px 76px 0px);
+  }
+
+  75% {
+    clip: rect(131px 900px 149px 0px);
+  }
+
+  80% {
+    clip: rect(139px 900px 148px 0px);
+  }
+
+  85% {
+    clip: rect(42px 900px 30px 0px);
+  }
+
+  90% {
+    clip: rect(25px 900px 36px 0px);
+  }
+
+  95% {
+    clip: rect(40px 900px 76px 0px);
+  }
+
+  100% {
+    clip: rect(94px 900px 68px 0px);
+  }
+}
+
+@keyframes glitch-animation-2 {
+  0% {
+    clip: rect(71px 900px 27px 0px);
+  }
+
+  5% {
+    clip: rect(95px 900px 22px 0px);
+  }
+
+  10% {
+    clip: rect(77px 900px 141px 0px);
+  }
+
+  15% {
+    clip: rect(59px 900px 99px 0px);
+  }
+
+  20% {
+    clip: rect(50px 900px 136px 0px);
+  }
+
+  25% {
+    clip: rect(96px 900px 81px 0px);
+  }
+
+  30% {
+    clip: rect(79px 900px 29px 0px);
+  }
+
+  35% {
+    clip: rect(134px 900px 148px 0px);
+  }
+
+  40% {
+    clip: rect(145px 900px 90px 0px);
+  }
+
+  45% {
+    clip: rect(124px 900px 128px 0px);
+  }
+
+  50% {
+    clip: rect(135px 900px 130px 0px);
+  }
+
+  55% {
+    clip: rect(11px 900px 139px 0px);
+  }
+
+  60% {
+    clip: rect(84px 900px 44px 0px);
+  }
+
+  65% {
+    clip: rect(131px 900px 72px 0px);
+  }
+
+  70% {
+    clip: rect(103px 900px 76px 0px);
+  }
+
+  75% {
+    clip: rect(131px 900px 149px 0px);
+  }
+
+  80% {
+    clip: rect(139px 900px 148px 0px);
+  }
+
+  85% {
+    clip: rect(42px 900px 30px 0px);
+  }
+
+  90% {
+    clip: rect(25px 900px 36px 0px);
+  }
+
+  95% {
+    clip: rect(40px 900px 76px 0px);
+  }
+
+  100% {
+    clip: rect(94px 900px 68px 0px);
+  }
 }
 
 canvas {
   display: block;
-}
-
-.embed-youtube {
-  position: relative;
-  padding-bottom: 56.25%;
-  /* 16:9 aspect ratio (most common) */
-  /* padding-bottom: 62.5%; */
-  /* 16:10 aspect ratio */
-  /* padding-bottom: 75%; */
-  /* 4:3 aspect ratio */
-  padding-top: 30px;
-  height: 0;
-  overflow: hidden;
-}
-
-.embed-youtube iframe,
-.embed-youtube object,
-.embed-youtube embed {
-  border: 0;
   position: absolute;
-  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  z-index: -1;
+}
+
+header,
+footer {
+  z-index: 1;
+  font-size: 3rem;
+}
+
+.rx {
+  text-align: right;
+  right: 0;
+  padding-right: 1%;
+}
+
+.lx {
+  text-align: left;
+  left: 0;
+  padding-left: 1%;
+}
+
+header a {
+  top: 0;
+}
+
+footer a {
+  bottom: 0;
+}
+
+.quote,
+.description,
+.picture {
+  padding: 1% 2%;
+  overflow-y: auto;
+}
+
+.quote p,
+.quote a {
+  font-weight: 100;
+  font-style: italic;
+  text-align: right;
+}
+
+.description {
+  font-weight: 400;
+  text-align: justify;
+  text-transform: none;
+}
+
+.picture {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+}
+
+.jsPanel-titlebar,
+.jsPanel-title,
+.jsPanel-controlbar {
+  font-variant: normal !important;
+}
+
+.jsPanel-icon {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.jsPanel-btn:hover {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.jsPanel-headerbar,
+.jsPanel-ftr.active {
+  padding: 0.5vh !important;
+}
+
+.jsPanel-content {
+  border-top: 0 !important;
+}
+
+::-webkit-scrollbar {
+  width: 0.6em;
+  height: 0.6em;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-track-piece,
+::-webkit-resizer {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-button:hover {
+  background: #fff;
 }

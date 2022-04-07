@@ -5,30 +5,45 @@
   <meta charset="utf-8">
   <link rel="author" href="https://leandroestrella.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="sTIME - time subjectivizer app by leandro estrella">
+  <meta name="description" content="sTIME a time subjectivizer app by leandro estrella">
   <title>sTIME</title>
   <link rel="icon" href="assets/icon-32.png" sizes="32x32" type="image/png">
   <!-- css -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <!-- p5.js -->
-  <script defer src="js/p5.js"></script>
-  <!-- secrets -->
-  <script defer src="js/secrets.js"></script>
-  <!-- firebase -->
-  <script defer src="https://www.gstatic.com/firebasejs/9.6.9/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/9.6.9/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/9.6.9/firebase-database-compat.js"></script>
-  <!-- shared -->
-  <script defer src="js/shared.js"></script>
+  <!-- jsPanel CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/jspanel.css" rel="stylesheet">
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <!-- font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&amp;display=swap" rel="stylesheet">
+  <header>
+    <a href="javascript:;" onclick="createQuote()" id="mark" class="lx">&#8221;</a>
+    <a href="javascript:;" onclick="createDescription()" id="info" class="rx">&#8505;</a>
+  </header>
+  <main>
+    <!-- jsPanel container -->
+    <div id="panel"></div>
+    <!-- p5js container -->
+    <div id="content"></div>
+  </main>
+  <footer>
+    <a href="https://www.leandroestrella.com" target="_blank" rel="noopener noreferrer" id="sign" class="lx"><span
+        class="glitch">le</span></a>
+    <a href="javascript:;" onclick="createMetronome()" id="eye" class="rx">&#128065;</a>
+  </footer>
   <!-- p5.js -->
+  <script defer src="js/p5.js"></script>
+  <!-- common scripts loader -->
+  <script defer src="js/loader.js"></script>
+  <!-- p5.js script -->
   <script defer src="js/sketch.js"></script>
+  <!-- jsPanel script -->
+  <script defer src="js/panel.js"></script>
+  <!-- jsPanel JavaScript -->
+  <script defer src="https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/jspanel.js"></script>
 </body>
 
 </html>

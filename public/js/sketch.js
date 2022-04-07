@@ -1,6 +1,7 @@
 /*
   'time is the intuition of ourselves and our inner space'
     - john cage
+
   'sTIME' a time subjectivizer app
     by leandro estrella  [leandroestrella.com]
     assisted by fernando cordón [github.com/fernanCordon]
@@ -13,7 +14,7 @@ var timeType, subjectiveTime, randomTime, instructions;
 var millisCounter, millisPressed, secondsCounter, minutesCounter, hoursCounter;
 
 // color and alpha variables
-var timeColor, instructionsColor, randomAlpha;
+var mainColor, secondaryColor, randomAlpha, uiActive;
 
 // subjective seconds and font size
 var subjectiveSeconds, fontSize;
@@ -33,8 +34,8 @@ function setup() {
   timeType = "aTIME";
   instructions = "press for ten seconds to create your time";
   /* color setup*/
-  timeColor = 255;
-  instructionsColor = 107;
+  mainColor = 255;
+  secondaryColor = 107;
   randomAlpha = 0;
   /* font setup */
   fontSize = width;
@@ -47,44 +48,65 @@ function setup() {
   secondsCounter = second();
   minutesCounter = minute();
   hoursCounter = hour();
-  createCanvas(windowWidth, windowHeight);
+  /* canvas setup */
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent("content");
+  /* input listener */
+  canvas.mousePressed(startStimeCreation);
+  canvas.mouseReleased(finishStimeCreation);
+  canvas.touchStarted(startStimeCreation);
+  canvas.touchEnded(finishStimeCreation);
 }
 
 function draw() {
   background(0);
   if (int(20 * subjectiveSeconds) > 0) {
-    if (frameCount % int(20 * subjectiveSeconds) === 0) {
+    if (
+      frameCount % int(20 * subjectiveSeconds) ===
+      0 /* && secondsCounter > 0 */
+    ) {
       // every 20 frames add a second & relates it to subjective seconds
       secondsCounter++;
     }
     if (
       frameCount % int(20 * subjectiveSeconds) === 0 &&
-      secondsCounter % 60 === 0
+      secondsCounter % 60 === 0 &&
+      secondsCounter > 0
     ) {
       // every 60 seconds add a minute
       minutesCounter++;
     }
     if (
       frameCount % int(20 * subjectiveSeconds) === 0 &&
-      minutesCounter % 60 === 0
+      minutesCounter % 60 === 0 &&
+      minutesCounter > 0
     ) {
       // every 60 minutes add an hour
       hoursCounter++;
     }
   }
-  textSize(fontSize / 4.25);
-  /* time type */
-  fill(instructionsColor);
-  text(timeType, width / 2, height / 2 - fontSize);
-  // subjective difference
-  fill(0);
-  text(subjectiveSeconds, width / 2, height / 2 + fontSize * 1.5);
+  /* calculate sizes based on screen depth */
+  let tSize, iSize, yPos;
+  if (window.devicePixelRatio > 1) {
+    tSize = (fontSize * 1.5) / window.devicePixelRatio;
+    iSize = (fontSize * 0.225) / window.devicePixelRatio;
+    yPos = (height * 0.045 * 3) / window.devicePixelRatio;
+  } else {
+    tSize = fontSize / window.devicePixelRatio;
+    iSize = fontSize * 0.225;
+    yPos = (height * 0.05) / window.devicePixelRatio;
+  }
+  /* time type (title) */
+  textSize(iSize * window.devicePixelRatio);
+  fill(secondaryColor);
+  text(timeType, width / 2, yPos);
   /* instructions */
-  fill(instructionsColor);
-  text(instructions, width / 2, height / 2 + fontSize);
+  textSize(iSize);
+  fill(secondaryColor);
+  text(instructions, width / 2, height - yPos);
   /* subjective time */
-  textSize(fontSize);
-  fill(timeColor);
+  textSize(tSize);
+  fill(mainColor);
   subjectiveTime =
     nf(hoursCounter % 60, 2) +
     "." +
@@ -103,11 +125,13 @@ function draw() {
   text(randomTime, width / 2, height / 2 - 5);
 }
 
-function mousePressed() {
+function startStimeCreation() {
   /* text and color */
-  timeColor = 0;
+  mainColor = 0;
   randomAlpha = 255;
-  instructionsColor = 0;
+  secondaryColor = 0;
+  uiActive = 1;
+  toggleUI();
   /* reset to system time */
   secondsCounter = second();
   minutesCounter = minute();
@@ -116,11 +140,13 @@ function mousePressed() {
   millisCounter = millis();
 }
 
-function mouseReleased() {
+function finishStimeCreation() {
   /* text and color */
-  timeColor = 255;
+  mainColor = 255;
   randomAlpha = 0;
-  instructionsColor = 107;
+  secondaryColor = 107;
+  uiActive = 0;
+  toggleUI();
   // compute millis pressed
   millisPressed = millis() - millisCounter;
   if (float(millisPressed) / 10000 <= 0.05) {
@@ -142,11 +168,23 @@ function mouseReleased() {
     console.log("sTIME created: " + subjectiveSeconds);
     /* text and color */
     timeType = "sTIME";
-    instructions =
-      "\n press for ten seconds to (re)create your time \n tap to reset";
+    instructions = "press for ten seconds to (re)create your time";
   }
   /* update sTIME in db */
   setStime();
+}
+
+function toggleUI() {
+  var links = document.getElementsByTagName("a");
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].href) {
+      if (uiActive) {
+        links[i].style.color = "black";
+      } else {
+        links[i].style.color = "white";
+      }
+    }
+  }
 }
 
 function initializeFields() {
@@ -159,9 +197,10 @@ function initializeFields() {
   secondsCounter = 0;
   minutesCounter = 0;
   hoursCounter = 0;
-  timeColor = 0;
-  instructionsColor = 0;
+  mainColor = 0;
+  secondaryColor = 0;
   randomAlpha = 0;
   subjectiveSeconds = 0;
   fontSize = 0;
+  uiActive = 1;
 }

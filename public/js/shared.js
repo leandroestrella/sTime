@@ -2,6 +2,10 @@
 // database
 var database, ref, firebase, stime;
 
+// jspanel
+var maxSize = 2,
+  minSize = 2.5;
+
 /* firebase configuration */
 firebase.initializeApp(firebaseConfig);
 database = firebase.database();
@@ -13,7 +17,6 @@ console.log(
 );
 
 function setStime() {
-  //initFirebase();
   /* update sTIME in db */
   data = {
     sTIME: subjectiveSeconds,

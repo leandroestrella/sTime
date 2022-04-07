@@ -27,19 +27,26 @@ function onYouTubeIframeAPIReady() {
     events: {
       onReady: onPlayerReady,
     },
+    functions: {
+      setPlaybackRate: stime,
+    },
   });
 }
 
 // call this function when the video player is ready
 function onPlayerReady(event) {
-  event.target.setPlaybackRate(1);
+  event.target.setPlaybackRate(stime);
+  setVideoSpeed();
 }
 
+function setVideoSpeed() {
+  stime = 1 / subjectiveSeconds;
+  player.setPlaybackRate(stime);
+}
 // set new playback rate when new sTIME is set
 ref.on("child_changed", (snapshot) => {
-  const changedPost = snapshot.val();
-  val = changedPost;
-  stime = 1 / changedPost;
+  const newStime = snapshot.val();
+  val = newStime;
+  stime = 1 / newStime;
   player.setPlaybackRate(stime);
-  console.log("playback rate: " + stime);
 });

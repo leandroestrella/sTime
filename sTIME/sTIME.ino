@@ -36,9 +36,11 @@ bool signupOK = false;
 
 unsigned long interval = 1000;
 int ledState = LOW;
+int relayPin = D3;
 
 void setup() {
   pinMode(BUILTIN_LED, OUTPUT);  // initialize onboard LED as output
+  pinMode(relayPin, OUTPUT);  // initialize onboard LED as output
 
   Serial.begin(115200);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -120,5 +122,6 @@ void loop() {
     // toggle the LED
     ledState = !ledState;
     digitalWrite(BUILTIN_LED, ledState);
+    digitalWrite(relayPin, ledState);
   }
 }

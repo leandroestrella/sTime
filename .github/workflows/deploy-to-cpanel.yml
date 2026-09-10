@@ -1,0 +1,34 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - "web"
+  workflow_dispatch:
+
+# The minimum needed: actions/checkout on a PRIVATE repository requires
+# contents: read. With "permissions: {}" the GITHUB_TOKEN has no permissions
+# at all and the checkout fails with a misleading "Repository not found".
+permissions:
+  contents: read
+
+# Two deploys running at once over the same FTP directory overwrite each
+# other and leave the state file inconsistent, so they queue instead.
+concurrency:
+  group: "deploy-to-cpanel-web"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: "./"

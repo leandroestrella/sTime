@@ -10,6 +10,9 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // create an <iframe> (and YouTube player) after the API code downloads
 function onYouTubeIframeAPIReady() {
   player = new YT.Player("player", {
+    // privacy-enhanced mode: youtube-nocookie.com doesn't set YouTube's
+    // tracking cookies for visitors (LNDR-155)
+    host: "https://www.youtube-nocookie.com",
     height: "750",
     width: "563",
     videoId: "tymHYCbMJ-o",

@@ -34,9 +34,8 @@
         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
         <div id="player"></div>
     </div>
-    <!-- common scripts loader -->
-    <script defer src="js/loader.js"></script>
-    <!-- video player -->
+    <!-- video player. The common scripts loader already ran on the parent
+         page, so this panel reuses secrets, firebase and shared.js. -->
     <script defer src="js/player.js"></script>
 </body>
 
